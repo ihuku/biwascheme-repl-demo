@@ -1,0 +1,29 @@
+<!DOCTYPE html> 
+<html>
+<head>
+  <!-- biwa repl template -->
+  <script src="biwascheme-0.6.9-min.js"></script>
+  <script>
+    var onError = function(e){ console.error(e); }
+    var biwa = new BiwaScheme.Interpreter(onError)
+    var conn = new WebSocket('ws://localhost:8903');
+
+    biwa.evaluate('(load "app.scm")');
+
+    conn.addEventListener('open', function(e) {
+      console.log("connection established");
+    });
+
+    conn.addEventListener('message', function(e) {
+      if (e.data === "operatemessage:reloadbrowser") {
+        location.reload();
+      } else {
+        conn.send(biwa.evaluate(e.data));
+      }
+    });
+  </script>
+</head>
+<body>
+  <p>Hello, World!</p>
+</body>
+</html>
