@@ -6,6 +6,8 @@ A simple demo that shows intaractive development with biwascheme using REPL.
 1. Clone this repository.
 ```
 $ git clone https://github.com/ihuku/biwascheme-repl-demo.git
+$ cd biwascheme-repl-demo
+$ npm install ws express
 ```
 
 2. Start web server.
